@@ -21,6 +21,7 @@ class PostController extends Controller
          'blog-author' => 'nullable|string|max:255',
          'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
       ]);
+      
 
       $post = new Post();
       $post->title = $validatedData['blog-title'];
