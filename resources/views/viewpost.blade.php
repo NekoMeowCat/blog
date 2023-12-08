@@ -24,15 +24,15 @@
             </div>   
             <div class="col-span-2 pt-16">
                 <div class="mb-6">
-                    <h1 class="underline block mb-2 text-2xl font-medium text-teal-300">Title</h1>
+                    <h1 class=" block mb-2 text-2xl font-medium text-white">Title</h1>
                     <p class="text-gray-200  text-sm rounded-lg">{{ $post->title }}</p>
                 </div>
                 <div class="mb-6">
-                    <h1 class="underline block mb-2 text-2xl font-medium text-white">Content</h1>
+                    <h1 class=" block mb-2 text-2xl font-medium text-white">Content</h1>
                     <p class="pr-10 text-gray-200 text-sm rounded-lg">{{ $post->body }}</p>
                 </div>
                 <div class="mb-16">
-                    <small class="text-gray-400">Author: {{ $post->author }}</small>
+                    <small class="text-white">Author: {{ $post->author }}</small>
                 </div>
                 @foreach ($comments as $comment)
                     <div class="flex items-start space-x-4 mr-10 p-2 mb-2 bg-gray-700 rounded ">

@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
+// error handling
+use Illuminate\Validation\ValidationException;
+
 class PostController extends Controller
 {
    public function create()
@@ -15,29 +18,37 @@ class PostController extends Controller
 
    public function store(Request $request)
    {
-      $validatedData = $request->validate([
-         'blog-title' => 'required|string|max:255',
-         'blog-content' => 'required|string|max:1000',
-         'blog-author' => 'nullable|string|max:255',
-         'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-      ]);
-
-      $post = new Post();
-      $post->title = $validatedData['blog-title'];
-      $post->body = $validatedData['blog-content'];
-      $post->author = $validatedData['blog-author'];
-
-      if ($request->hasFile('post_image')) {
-         $postImage = $request->file('post_image');
-         $imagePath = $postImage->store('images', 'public');
-         $post->image = $imagePath;
-      }
-
-      $post->user_id = Auth::id();
-
-      $post->save();
-
-      return redirect()->route('dashboard');
+       try {
+           $validatedData = $request->validate([
+               'blog-title' => 'required|string|max:255',
+               'blog-content' => 'required|string|max:1000',
+               'blog-author' => 'nullable|string|max:255',
+               'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+           ]);
+   
+           $post = new Post();
+           $post->title = $validatedData['blog-title'];
+           $post->body = $validatedData['blog-content'];
+           $post->author = $validatedData['blog-author'];
+   
+           if ($request->hasFile('post_image')) {
+               $postImage = $request->file('post_image');
+               $imagePath = $postImage->store('images', 'public');
+               $post->image = $imagePath;
+           }
+   
+           $post->user_id = Auth::id();
+   
+           $post->save();
+   
+           return redirect()->route('dashboard');
+       } catch (ValidationException $e) {
+           // If validation fails, redirect back with errors
+           return redirect()->route('add-post')->withErrors($e->errors())->withInput();
+       } catch (\Exception $e) {
+           // Handle other exceptions (e.g., database errors)
+           return redirect()->back()->with('error', 'An error occurred while saving the post.');
+       }
    }
 
    public function update(Request $request, $id)

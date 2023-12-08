@@ -15,7 +15,7 @@
             </div>
             <div class="col-span-2 pl-20 mt-10">
                 <div class="mb-6">
-                    <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post Title</label>
+                    <label for="blog-title" class="block mb-2 text-sm font-medium no-underline text-gray-900 dark:text-white">Post Title</label>
                     <input type="text" id="blog-title" name="blog-title" value="{{ $post->title }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
                 </div>
                 <div class="mb-6">
