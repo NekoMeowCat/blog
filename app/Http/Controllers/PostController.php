@@ -18,6 +18,7 @@ class PostController extends Controller
 
    public function store(Request $request)
    {
+<<<<<<< HEAD
        try {
            $validatedData = $request->validate([
                'blog-title' => 'required|string|max:255',
@@ -49,6 +50,32 @@ class PostController extends Controller
            // Handle other exceptions (e.g., database errors)
            return redirect()->back()->with('error', 'An error occurred while saving the post.');
        }
+=======
+      $validatedData = $request->validate([
+         'blog-title' => 'required|string|max:255',
+         'blog-content' => 'required|string|max:1000',
+         'blog-author' => 'nullable|string|max:255',
+         'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+      ]);
+      
+
+      $post = new Post();
+      $post->title = $validatedData['blog-title'];
+      $post->body = $validatedData['blog-content'];
+      $post->author = $validatedData['blog-author'];
+
+      if ($request->hasFile('post_image')) {
+         $postImage = $request->file('post_image');
+         $imagePath = $postImage->store('images', 'public');
+         $post->image = $imagePath;
+      }
+
+      $post->user_id = Auth::id();
+
+      $post->save();
+
+      return redirect()->route('dashboard');
+>>>>>>> 02aaeaf7684d10133584849294e7bd7385a9f190
    }
 
    public function update(Request $request, $id)
