@@ -4,7 +4,8 @@
             <div class="border rounded-md m-1">
                 <span class="text-lg text-gray-100">What's on your mind?</span>
             </div>
-            <form action="" class="">
+            <form method="post" action="{{ route('post.addPost') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="block md:flex m-1 rounded-md border">
                     <div class="border m-1 md:w-1/2">
                         <div class="w-full flex justify-center">
