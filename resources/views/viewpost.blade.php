@@ -1,14 +1,35 @@
 <x-app-layout>
-    <div class="addpost-container min-h-screen flex justify-start w-full px-20 py-8 bg-gray-800 text-white">
-        
-        <div class="grid grid-cols-3 gap-4 w-full h-100 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700">
-            <div class="col-span-1 h-96 w-96 ">
-                <div class="p-6">
-                    <img class="h-[350px] w-[350px] object-cover" src="{{ asset('storage/' . $post->image ) }}" id="preview-image" alt="Post Photo" >
-                    <form class="pt-5" method="post" action="{{ route('comments.store') }}">
+    <section class="min-h-screen w-full border bg-black">
+        <div class="flex justify-center">
+            <div class="border-2 rounded-lg w-96 md:w-[600px] m-6">
+                <!-- post profile -->
+                <div class="m-2 flex justify-start border rounded-md flex-grow">
+                    <div class="m-2 border rounded-full w-16">
+                        <img class="h-full rounded-full object-cover w-full" src="{{ asset('storage/' . Auth::user()->image) }}" alt="Bordered avatar">
+                    </div>
+                    <div class="w-5/6 border m-1">
+                        <div class="flex justify-start items-start">
+                            <span class="font-bold text-white"> {{ $post->author }}</span>
+                        </div>
+                        <div class="flex justify-start items-start">
+                            <small class="font-light font-poppins text-gray-400"> {{ $post->created_at->format('F d, Y \a\t H:i') }} </small>
+                        </div>
+                    </div>
+                </div> 
+                <!-- post profile -->
+                <!-- post content -->
+                <div class="m-2 flex justify-start border rounded-md">
+                    <span class="text-start font-poppins text-gray-200 text-base">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum accusamus labore cumque adipisci, quos praesentium soluta, repellat asperiores veritatis aliquam excepturi vero dignissimos dolorem nihil saepe atque quia tempore nam doloribus! Laborum ut, accusantium, cupiditate ad doloribus dicta harum ipsam aliquid corporis placeat quam totam nam laudantium vel labore unde.
+                    </span>
+                </div>
+                <!-- post content -->
+                <!-- post comment submit -->
+                <div class="m-2 flex border rounded-md">
+                    <form class="w-full" method="post" action="{{ route('comments.store') }}">
                         @csrf
                         <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}">
-                        <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                                 <label for="comment" class="sr-only">Your comment</label>
                                 <textarea id="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." name="comment" required></textarea>
@@ -20,35 +41,34 @@
                             </div>
                         </div>
                     </form>
-                </div>               
-            </div>   
-            <div class="col-span-2 pt-16">
-                <div class="mb-6">
-                    <h1 class="underline block mb-2 text-2xl font-medium text-teal-300">Title</h1>
-                    <p class="text-gray-200  text-sm rounded-lg">{{ $post->title }}</p>
                 </div>
-                <div class="mb-6">
-                    <h1 class="underline block mb-2 text-2xl font-medium text-white">Content</h1>
-                    <p class="pr-10 text-gray-200 text-sm rounded-lg">{{ $post->body }}</p>
-                </div>
-                <div class="mb-16">
-                    <small class="text-gray-400">Author: {{ $post->author }}</small>
-                </div>
-                @foreach ($comments as $comment)
-                    <div class="flex items-start space-x-4 mr-10 p-2 mb-2 bg-gray-700 rounded ">
-                        <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('storage/' . $comment->user->image ) }}" alt="">
-                        <div class="font-medium dark:text-white">
-                            <div>{{ $comment->user->name }}</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">{{ $comment->created_at->format('F d, Y \a\t H:i') }}</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-300 mt-4">{{ $comment->content }}</div>
+                <!-- post comment submit -->
+                <!-- post comment section -->
+                <div class="m-2 block border rounded-md h-auto">
+                    @foreach ($comments as $comment)
+                        <div class="flex items-start w-full mr-10 p-2 mb-2 bg-gray-700 rounded ">
+                            <div class="m-1 border rounded-full w-14">
+                                <img class="h-14 rounded-full object-cover w-full" src="{{ asset('storage/' . Auth::user()->image) }}" alt="Bordered avatar">
+                            </div>
+                            <div class="w-5/6 border m-1">
+                                <div class="flex justify-start items-start">
+                                    <span class="font-bold text-white"> {{ $comment->user->name }}</span>
+                                </div>
+                                <div class="flex justify-start items-start">
+                                    <small class="font-light font-poppins text-gray-400"> {{ $post->created_at->format('F d, Y \a\t H:i') }} </small>
+                                </div>
+                                <div class="">
+                                    <span class="text-gray-200">{{ $comment->content }}</span>
+                                </div>
+                            </div>                          
                         </div>
-                    </div>
-                @endforeach                 
-            </div>           
+
+                    @endforeach   
+                </div>
+                <!-- post comment section -->
+            </div>
         </div>
-    </div>
-
-
+    </section>
 </x-app-layout>
 
 
