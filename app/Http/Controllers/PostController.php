@@ -5,6 +5,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -20,10 +21,7 @@ class PostController extends Controller
          'blog-content' => 'required|string|max:1000',
          'blog-author' => 'nullable|string|max:255',
          'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-      ]);
-
-      
-      
+      ]);   
 
       $post = new Post();
       $post->title = $validatedData['blog-title'];
@@ -39,6 +37,7 @@ class PostController extends Controller
       $post->user_id = Auth::id();
 
       $post->save();
+      Session::flash('success', 'Post successfully created!');
 
       return redirect()->route('dashboard');
    }

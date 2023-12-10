@@ -25,7 +25,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $posts = Post::all();
+    $posts = Post::where('user_id', Auth::id())->paginate(5); 
+
     return view('dashboard', ['posts' => $posts]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

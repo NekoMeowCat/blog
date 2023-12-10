@@ -1,6 +1,6 @@
 <x-app-layout>
     <section class="min-h-screen overflow-hidden bg-gray-800">
-        <div class="m-8 md:mx-14 border rounded-sm">
+        <div class="m-8 md:mx-14 border rounded-sm">         
             <div class="border rounded-md m-1">
                 <span class="text-lg text-gray-100">What's on your mind?</span>
             </div>
@@ -19,11 +19,11 @@
                     <div class="w-full px-8">
                         <div class="mb-6">
                     <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post Title</label>
-                    <input type="text" id="blog-title" name="blog-title" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
+                    <input type="text" id="blog-title" name="blog-title" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" required />
                 </div>
                 <div class="mb-6">
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                    <textarea id="blog-content" name="blog-content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Write your thoughts here..."></textarea>
+                    <textarea id="blog-content" name="blog-content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Write your thoughts here..." required></textarea>
                 </div>
                 <div class="mb-4">
                     <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author ( Optional )</label>
